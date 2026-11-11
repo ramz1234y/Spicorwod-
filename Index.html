@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Developer Yuga Pratama Kusuma</title>
+
+<style>
+:root {
+  --bg: #080d18;
+  --panel: #111b30;
+  --text: #f4f7ff;
+  --muted: #a9b6ce;
+  --cyan: #6fffe9;
+  --blue: #73b7ff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  background:
+    radial-gradient(ellipse at 50% 20%, #3568b73b, transparent 45%),
+    linear-gradient(180deg, #080d18, #101a2d, #080d18);
+  background-size: 100% 100%, 100% 180%;
+  animation: pageGlow 12s ease-in-out infinite alternate;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: .4;
+  background-image:
+    radial-gradient(2px 2px at 12% 18%, white 45%, transparent 55%),
+    radial-gradient(1px 1px at 72% 32%, white 45%, transparent 55%),
+    radial-gradient(2px 2px at 88% 76%, #8edcff 45%, transparent 55%),
+    radial-gradient(1px 1px at 34% 82%, white 45%, transparent 55%);
+  background-size: 310px 270px;
+  animation: starsDrift 35s linear infinite;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* NAVBAR */
+
+.topbar {
+  position: fixed;
+  z-index: 20;
+  inset: 18px 5% auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 18px;
+  border: 1px solid #ffffff22;
+  border-radius: 16px;
+  background: #080d18b0;
+  backdrop-filter: blur(16px);
+}
+
+.brand {
+  font-weight: 850;
+  letter-spacing: .12em;
+  font-size: 13px;
+}
+
+.brand span {
+  color: var(--cyan);
+}
+
+nav {
+  display: flex;
+  gap: 22px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+nav a {
+  position: relative;
+  transition: .3s;
+}
+
+nav a:hover {
+  color: white;
+}
+
+/* HERO */
+
+.hero {
+  min-height: 100vh;
+  padding: 120px 7% 70px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 35px;
+  max-width: 1400px;
+  margin: auto;
+}
+
+.hero > div:first-child {
+  animation: introRise .9s ease both;
+}
+
+.eyebrow {
+  display: inline-flex;
+  gap: 9px;
+  align-items: center;
+  color: var(--cyan);
+  font-size: 11px;
+  letter-spacing: .2em;
+  font-weight: 800;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 14px var(--cyan);
+}
+
+h1 {
+  font-size: clamp(48px, 7vw, 88px);
+  line-height: .96;
+  letter-spacing: -.07em;
+  margin: 23px 0 18px;
+}
+
+h1 span {
+  color: transparent;
+  -webkit-text-stroke: 1px #a8c8ef;
+  background: linear-gradient(
+    100deg,
+    #6fffe9,
+    #73b7ff,
+    #ff83c5,
+    #6fffe9
+  );
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: textFlow 7s linear infinite;
+}
+
+.intro {
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 490px;
+  font-size: 15px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.btn {
+  padding: 13px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 800;
+  border: 1px solid #ffffff30;
+  transition: .25s;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn.primary {
+  color: #07111c;
+  background: var(--cyan);
+  border-color: var(--cyan);
+}
+
+.btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px #0006;
+}
+
+/* ANIMASI 3D */
+
+.scene {
+  min-height: 470px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  perspective: 900px;
+  animation: sceneAppear 1.2s .2s both;
+}
+
+.orb {
+  position: absolute;
+  width: min(38vw,390px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 28%,
+    #9ce9ff,
+    #3974bb 35%,
+    #172b51 68%,
+    #0b1325
+  );
+  box-shadow: 0 0 90px #4ca9ff35,
+              inset -25px -30px 60px #020713;
+  animation: float 6s ease-in-out infinite,
+             orbPulse 5s ease-in-out infinite alternate;
+}
+
+.orbit {
+  position: absolute;
+  width: min(48vw,500px);
+  aspect-ratio: 1;
+  border: 1px solid #9bdcff55;
+  border-radius: 50%;
+  transform: rotateX(68deg) rotateZ(-22deg);
+  animation: spin 18s linear infinite;
+}
+
+.orbit::before,
+.orbit::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 22px var(--cyan);
+}
+
+.orbit::before {
+  top: 14%;
+  left: 18%;
+}
+
+.orbit::after {
+  bottom: 12%;
+  right: 16%;
+  background: #ff83c5;
+  box-shadow: 0 0 22px #ff83c5;
+}
+
+.platform {
+  position: absolute;
+  bottom: 47px;
+  width: min(75%,520px);
+  height: 120px;
+  background: linear-gradient(145deg,#263d61,#101b30 70%);
+  border: 1px solid #6da6d866;
+  transform: rotateX(62deg) rotateZ(-9deg);
+  border-radius: 24px;
+  box-shadow: 0 35px 50px #0009;
+}
+
+.platform::after {
+  content: "";
+  position: absolute;
+  inset: 15px;
+  border: 1px dashed #8fc9ef55;
+  border-radius: 15px;
+}
+
+.cube {
+  position: absolute;
+  bottom: 145px;
+  width: 116px;
+  height: 116px;
+  border-radius: 22px;
+  display: grid;
+  place-items: center;
+  font-size: 48px;
+  font-weight: 900;
+  color: #07111c;
+  background: linear-gradient(140deg,#b4fff4,#56a9dc 60%,#8a85ff);
+  box-shadow: 18px 22px 0 #142b49,
+              0 0 60px #6fffe944;
+  transform: rotate(-12deg);
+  animation: float 4.5s ease-in-out infinite,
+             cubeGlow 3.5s ease-in-out infinite alternate;
+}
+
+.cube::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid #ffffff70;
+  border-radius: 16px;
+  animation: innerSpin 12s linear infinite;
+}
+
+.float-label {
+  position: absolute;
+  padding: 10px 13px;
+  border: 1px solid #ffffff22;
+  border-radius: 10px;
+  background: #0b1425d9;
+  color: #dcecff;
+  font-size: 11px;
+  letter-spacing: .08em;
+  animation: labelBob 5s ease-in-out infinite;
+}
+
+.label-one {
+  top: 18%;
+  left: 2%;
+}
+
+.label-two {
+  right: 0;
+  bottom: 25%;
+  animation-delay: -2s;
+}
+
+.scroll {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #8da0bd;
+  font-size: 10px;
+  letter-spacing: .25em;
+}
+
+/* SECTION */
+
+.section {
+  max-width: 1120px;
+  margin: auto;
+  padding: 90px 7%;
+}
+
+.section-head {
+  margin-bottom: 30px;
+}
+
+.section-head small {
+  color: var(--cyan);
+  letter-spacing: .2em;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+h2 {
+  font-size: clamp(30px,4vw,48px);
+  margin: 9px 0;
+  letter-spacing: -.05em;
+}
+
+.section-head p {
+  color: var(--muted);
+}
+
+/* PROJECT */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 16px;
+}
+
+.card {
+  min-height: 190px;
+  padding: 23px;
+  border-radius: 17px;
+  border: 1px solid #ffffff22;
+  background: linear-gradient(145deg,#1b2b46,#0c1423);
+  transition: .35s;
+  position: relative;
+  overflow: hidden;
+  animation: cardEnter .7s both;
+}
+
+.card:nth-child(2) {
+  animation-delay: .12s;
+}
+
+.card:nth-child(3) {
+  animation-delay: .24s;
+}
+
+.card:hover {
+  transform: translateY(-9px) scale(1.015);
+  border-color: #6fffe977;
+  box-shadow: 0 22px 45px #0005;
+}
+
+.icon {
+  font-size: 25px;
+  margin-bottom: 22px;
+}
+
+.card h3 {
+  margin-bottom: 9px;
+}
+
+.card p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 17px;
+}
+
+.tags span {
+  color: #c5e5ff;
+  background: #6aaeff17;
+  border: 1px solid #8fcaff25;
+  padding: 5px 9px;
+  border-radius: 30px;
+  font-size: 10px;
+}
+
+/* ABOUT */
+
+.about {
+  border: 1px solid #ffffff22;
+  background: #111b30c7;
+  border-radius: 20px;
+  padding: 30px;
+  display: grid;
+  grid-template-columns: 1.3fr .7fr;
+  gap: 25px;
+  align-items: center;
+}
+
+.about p {
+  color: var(--muted);
+  line-height: 1.8;
+  font-size: 14px;
+  margin: 12px 0 20px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.stat {
+  padding: 17px;
+  border-radius: 13px;
+  background: #ffffff08;
+  border: 1px solid #ffffff22;
+}
+
+.stat b {
+  display: block;
+  color: var(--cyan);
+  font-size: 25px;
+}
+
+.stat span {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+/* FOOTER */
+
+footer {
+  padding: 30px 7%;
+  text-align: center;
+  color: #8192ae;
+  border-top: 1px solid #ffffff22;
+  font-size: 12px;
+}
+
+/* KEYFRAMES */
+
+@keyframes float {
+  0%,100% {
+    transform: translateY(0) rotate(-12deg);
+  }
+  50% {
+    transform: translateY(-18px) rotate(-7deg);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotateX(68deg) rotateZ(338deg);
+  }
+}
+
+@keyframes pageGlow {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 0 0, 0 100%; }
+}
+
+@keyframes starsDrift {
+  from { background-position: 0 0; }
+  to { background-position: 310px 270px; }
+}
+
+@keyframes introRise {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+    filter: blur(7px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes sceneAppear {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes textFlow {
+  to { background-position: 250% center; }
+}
+
+@keyframes orbPulse {
+  from { filter: brightness(.88); }
+  to { filter: brightness(1.18); }
+}
+
+@keyframes cubeGlow {
+  from {
+    box-shadow: 18px 22px 0 #142b49, 0 0 35px #6fffe922;
+  }
+  to {
+    box-shadow: 18px 22px 0 #142b49, 0 0 75px #6fffe977;
+  }
+}
+
+@keyframes innerSpin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes labelBob {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+
+@media(max-width:760px) {
+
+  .topbar {
+    inset: 10px 4% auto;
+  }
+
+  nav {
+    gap: 11px;
+    font-size: 11px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding-top: 130px;
+    gap: 0;
+  }
+
+  .intro {
+    margin: auto;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+
+  .scene {
+    min-height: 390px;
+  }
+
+  .orb {
+    width: 250px;
+  }
+
+  .orbit {
+    width: 320px;
+  }
+
+  .platform {
+    bottom: 30px;
+  }
+
+  .cube {
+    bottom: 115px;
+    width: 90px;
+    height: 90px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .about {
+    grid-template-columns: 1fr;
+  }
+
+  .scroll {
+    display: none;
+  }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <a class="brand" href="#home">Yuga Pratama Kusuma<span>.</span>Developer</a>
+
+  <nav>
+    <a href="#home">Halaman utamah</a>
+    <a href="#projects">Tujuan Kerja</a>
+    <a href="#about">sering kepikiran</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- HOME -->
+
+<section class="hero" id="home">
+
+  <div>
+
+    <div class="eyebrow">
+      <i class="dot"></i>
+      PORTFOLIO HASIL KARYA YUGA · 2026
+    </div>
+
+    <h1>
+      Perkenalkan Nama Aku<br>
+      <span>Yuga</span>
+    </h1>
+
+    <p class="intro">
+      
+    </p>
+
+    <div class="actions">
+      <a class="btn primary" href="#projects">
+        Jelajahi Pekerjaan Ku ↗
+      </a>
+
+      <a class="btn" href="#about">
+        Kenalan Dulu Kali
+      </a>
+    </div>
+
+  </div>
+
+  <div class="scene">
+
+    <div class="orbit"></div>
+    <div class="orb"></div>
+    <div class="platform"></div>
+
+    <div class="cube">Y</div>
+
+    <div class="float-label label-one">
+      ✦ CREATIVE DEVELOPER
+    </div>
+
+    <div class="float-label label-two">
+      HTML · CSS · Belajar Pengembangan Web 3D
+    </div>
+
+  </div>
+
+  <div class="scroll">
+    Tarik Untuk Menjelajahi ↓
+  </div>
+
+</section>
+
+<!-- PROJECTS -->
+
+<section class="section" id="projects">
+
+  <div class="section-head">
+    <small>Perjaan</small>
+    <h2>Sedang Ku Lakukan Atau Kerjain</h2>
+    <p>Beberapa Hal Atau Pekerjaan , Mybe Menarik Untuk Di Lakukan</p>
+  </div>
+
+  <div class="cards">
+
+    <article class="card">
+      <div class="icon">⌘</div>
+
+      <h3>Tampilan Portfolio</h3>
+
+      <p>
+        Website Untuk Memperkenalkan Diri
+        Dan Hasil Karya Web Site 3D Diri Ku
+      </p>
+
+      <div class="tags">
+        <span>HTML</span>
+        <span>CSS</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="icon">▣</div>
+
+      <h3>Online Store Atau Market</h3>
+
+      <p>
+        Konsep Toko Online Untuk Menampilkan
+        Nama Toko Clasic Jual Produk Tempat
+        Beli Dan Jual , Hal Yg Paling Penting
+        Amanah Dan Terpercaya
+      </p>
+
+      <div class="tags">
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>PHP</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="icon">✧</div>
+
+      <h3>Percobaan Selanjutnya</h3>
+
+      <p>
+        Mungkin Butuh Waktu Yg lama
+        Karena Masih Banyak Atau Beberapa
+        Hal Yg Ingin Ku Kerjakan Bukan
+        Hanya Coding Atau Dunia
+        Media
+      </p>
+
+      <div class="tags">
+        <span>Learning</span>
+        <span>Creative</span>
+      </div>
+    </article>
+
+  </div>
+
+</section>
+
+<!-- ABOUT -->
+
+<section class="section" id="about">
+
+  <div class="section-head">
+    <small>Sedikit Tentang Diri Ku</small>
+    <h2>Masih Dalam Proses Atau Perjalanan</h2>
+  </div>
+
+  <div class="about">
+
+    <div>
+
+      <h3>Kenalin Aku Yuga Pratama Kusuma , Panggil Aja Yuga Atau Saga</h3>
+
+      <p>
+        Sepertih Yg Kalian Semua Lihat Web Site , Yg Aku Buat Ini Mengambarkan Animasi Atau Bisa
+        Di Bilang Gerakan Namun Ini Versi 3D , Mybe Gw bakalan Bikin Yg Lebih Enak Saat Atau ,
+        Ketika Di LIhat Terimah kasih Sudah Membaca Izin Undur Diri Terimah , Gaji
+      </p>
+
+      <a class="btn primary" href="mailto:emailkamu@example.com">
+        Hubungi Aku ↗
+      </a>
+
+    </div>
+
+    <div class="stats">
+
+      <div class="stat">
+        <b>2+</b>
+        <span>Sedang Aku Pelajari</span>
+      </div>
+
+      <div class="stat">
+        <b>∞</b>
+        <span>Ide Yg Sedang Ku coba</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Terkadang Pengalaman Itu Penting
+</footer>
+
+</body>
+</html>
